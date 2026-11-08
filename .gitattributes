@@ -1,0 +1,3 @@
+# Client files are published byte for byte (the updater checks their SHA256).
+client/** -text
+updater/*.bat text eol=crlf

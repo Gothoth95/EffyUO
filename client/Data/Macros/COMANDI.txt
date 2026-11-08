@@ -1,0 +1,354 @@
+MACRO PYTHON NEL CLIENT (sintassi ClassicAssist, Python 2)
+===========================================================
+
+Dove vanno le macro:  Client\Data\Macros\<nome>.py
+
+Come si lanciano:
+  -pyrun <nome>        esegue Data\Macros\<nome>.py
+  -py <codice>         esegue una riga al volo, es. -py HeadMsg('ciao', 'self', 66)
+  -pystop              ferma la macro in esecuzione
+  -assist              apre/chiude la finestra Assistant (macro, opzioni, amici, agenti)
+  -pyedit [nome]       apre l'editor delle macro (anche da -assist > Macro > Apri editor)
+  Tasti rapidi CA (comandi, magie, skill): -assist > Hotkey
+                       anche come hotkey: azione macro "OpenAssistant"
+  Hotkey: Opzioni > Macro > nuova macro > azione "PythonMacro", scrivi il nome
+          del file (senza .py) nel campo di testo e assegna il tasto.
+          "PythonMacroStop" ferma la macro.
+  print '...' scrive nel journal.
+
+Opzioni per macro (editor, salvate in Data\Macros\macros.json):
+  Loop               riparte da sola alla fine (minimo 50 ms per giro)
+  Background         gira in parallelo; avviarla di nuovo la ferma
+  Autostart          parte quando entri in gioco
+  Non interrompere   se e' gia' in esecuzione, riavviarla non la ferma
+  Gruppo             cartella logica nella lista
+  PlayMacro('nome', 1, 2) passa gli argomenti nella variabile args.
+
+Alias riconosciuti: 'self', 'backpack', 'bank', 'mount', 'last'/'lasttarget',
+'lastobject', 'enemy', 'friend', 'found' e quelli creati con SetAlias.
+Accettano anche seriali (0x...).
+
+Impostazioni:
+  Data\Assistant\options.json  opzioni CA (ActionDelay, messaggi target, amici...)
+  Data\Assistant\agents.json   agenti: Dress, Organizer, Autoloot, Scavenger,
+                               Counters, VendorBuy, TrapPouch (si crea al primo avvio)
+  Extra non-CA: SaveDress(nome) salva cio' che indossi come lista Dress.
+
+Tutti i 257 comandi ClassicAssist (LvX)
+---------------------------------------
+
+[Abilita]
+  ClearAbility()
+  ActiveAbility()
+  SetAbility(ability, onOff="toggle")
+  Fly()
+  Land()
+  Flying(obj)
+
+[Azioni]
+  WaitForContents(obj, timeout=5000)
+  Contents(obj)
+  EquipLastWeapon()
+  UseOnce(graphic, hue=-1)
+  ClearUseOnce()
+  Attack(obj)
+  ClearHands(hand="both")
+  ClickObject(obj)
+  ToggleMounted()
+  Feed(obj, graphic, amount=1, hue=-1)
+  Rename(obj, name)
+  ShowNames(showType)
+  EquipType(id, layer)
+  EquipItem(obj, layer)
+  FindLayer(layer, obj=None)
+  Ping()
+  ContextMenu(obj, entry)
+  WaitForContext(obj, entry, timeout)
+  WaitForContext(obj, entryName, timeout)
+
+[Agenti]
+  Dress(name=None)
+  Undress(name)
+  Dressing()
+  DressConfig()
+  StopDress()
+  SaveDress(name, undressContainer=None)
+  Organizing()
+  Organizer(name, sourceContainer=None, destinationContainer=None)
+  StopOrganizer()
+  SetOrganizerContainers(entryName, sourceContainer=None, destinationContainer=None)
+  Autolooting()
+  Autoloot(obj)
+  SetAutolootContainer(obj)
+  SetAutoloot(onOff="toggle")
+  SetScavenger(onOff="toggle")
+  Counter(name)
+  SetVendorBuyAutoBuy(listName, onOff="toggle")
+  UseTrapPouch()
+  ClearTrapPouch()
+  SetTrapPouch(obj)
+  WaitForTradeWindow(timeout=-1)
+  TradeAccept()
+  TradeReject()
+  TradeClose()
+  TradeCurrency(gold, platinum=0)
+
+[Alias]
+  SetAlias(aliasName, obj)
+  SetMacroAlias(aliasName, obj)
+  SetPlayerAlias(aliasName, obj)
+  UnsetAlias(aliasName)
+  UnsetPlayerAlias(aliasName)
+  GetAlias(aliasName)
+  GetPlayerAlias(aliasName)
+  FindAlias(aliasName)
+  PromptAlias(aliasName)
+  PromptMacroAlias(aliasName)
+  PromptPlayerAlias(aliasName)
+
+[Consumabili]
+  BandageSelf()
+  Dummy(a, b)
+
+[Entita]
+  Distance(obj=None)
+  Distance(x, y)
+  InRange(obj, distance)
+  Hue(obj=None)
+  Graphic(obj=None)
+  X(obj=None)
+  Y(obj=None)
+  Z(obj=None)
+  Map()
+  Name(obj=None)
+  BuffExists(name)
+  BuffTime(name)
+  SpecialMoveExists(name)
+  DirectionTo(obj)
+  Direction(obj=None)
+  HideEntity(obj)
+
+[Gump]
+  WaitForGump(gumpId=0, timeout=30000)
+  ReplyGump(gumpId, buttonId, switches=None, textEntries=None)
+  GumpExists(gumpId)
+  InGump(gumpId, text)
+  CloseGump(serial)
+  OpenVirtueGump(obj=None)
+  OpenGuildGump()
+  OpenQuestsGump()
+  OpenHelpGump()
+  ConfirmPrompt(message, closable=False)
+  SelectionPrompt(options, message="Please choose an option...", closable=False)
+  MessagePrompt(message, initialText="", closable=False)
+  GetText(prompt, timeout=30000)
+  ItemArrayGump(items, multiSelect=False, x=100, y=100, fixedSize=False)
+
+[Journal]
+  InJournal(text, author="", hue=-1, timeout=-1, buffer=DEFAULT_JOURNAL_BUFFER)
+  ClearJournal(buffer=DEFAULT_JOURNAL_BUFFER)
+  WaitForJournal(text, timeout, author="", hue=-1)
+  WaitForJournal(entries, timeout, author="")
+
+[Liste]
+  CreateList(listName)
+  ListExists(listName)
+  List(listName)
+  PushList(listName, value)
+  PopList(listName, elementValue=None)
+  GetList(listName)
+  RemoveList(listName)
+  ClearList(listName)
+  InList(listName, value)
+
+[Macro]
+  PlayMacro(name, *args)
+  Stop(name=None)
+  StopAll()
+  Replay(*args)
+  IsRunning(name)
+  PlayCUOMacro(name)
+
+[Generali]
+  BringClientWindowToFront()
+  SetQuietMode(onOff)
+  InvokeVirtue(virtue)
+  Resync()
+  Pause(milliseconds)
+  SysMessage(text, hue=0x03B2)
+  Info(obj=None)
+  OpenECV(obj)
+  Hotkeys(onOff="toggle")
+  WarMode(onOff="toggle")
+  MessageBox(title, body)
+  PlaySound(param, playSync=True)
+  Playing()
+  Playing(macroName)
+  DisplayQuestPointer(x, y, enabled=True)
+  Snapshot(delay=0, fullscreen=None, fileName="")
+  Logout()
+  Quit()
+  SetAutologin(enabled, account="", serverIndex=-1, characterIndex=-1)
+
+[Mappa]
+  AddMapMarker(name, x, y, facet, zoomLevel=3, iconName="bank")
+  RemoveMapMarker(name)
+  ClearMapMarkers()
+
+[Menu]
+  WaitForMenu(gumpId=0, timeout=30000)
+  ReplyMenu(gumpId, buttonId, itemId=0, hue=0)
+  CloseMenu(gumpId)
+  InMenu(gumpId, text)
+  MenuExists(gumpId)
+
+[Messaggi]
+  Msg(message, hue=DEFAULT_SPEAK_HUE)
+  YellMsg(message)
+  WhisperMsg(message)
+  EmoteMsg(message)
+  GuildMsg(message)
+  AllyMsg(message)
+  PartyMsg(message)
+  ChatMsg(message)
+  HeadMsg(message, obj=None, hue=DEFAULT_SPEAK_HUE)
+  PromptMsg(message)
+  WaitForPrompt(timeout)
+  CancelPrompt()
+
+[Mobili]
+  InFriendList(obj)
+  AddFriend(obj=None)
+  RemoveFriend(obj=None)
+  Dead(obj=None)
+  Hidden(obj=None)
+  Hits(obj=None)
+  MaxHits(obj=None)
+  DiffHits(obj=None)
+  DiffHitsPercent(obj=None)
+  Stam(obj=None)
+  MaxStam(obj=None)
+  Mana(obj=None)
+  MaxMana(obj=None)
+  Str()
+  Dex()
+  Int()
+  War(obj)
+  Followers()
+  MaxFollowers()
+  Weight()
+  MaxWeight()
+  DiffWeight()
+  Gold()
+  Luck()
+  TithingPoints()
+  FasterCastRecovery()
+  FasterCasting()
+  SwingSpeedIncrease()
+  Poisoned(obj=None)
+  YellowHits(obj=None)
+  Paralyzed(obj=None)
+  Mounted(obj=None)
+  InParty(obj)
+
+[Movimento]
+  Walk(direction)
+  Run(direction)
+  Turn(direction)
+  SetForceWalk(force)
+  ToggleForceWalk()
+  Following()
+  Follow(obj=None)
+  Pathfind(x, y, z, checkDistance=True, desiredDistance=0)
+  Pathfind(obj, checkDistance=True, desiredDistance=0)
+  Pathfinding()
+
+[Notorieta]
+  Criminal(obj)
+  Gray(obj)
+  Ally(obj)
+  Enemy(obj)
+  Invulnerable(obj)
+  Innocent(obj)
+  Murderer(obj)
+
+[Oggetti]
+  IgnoreObject(obj)
+  ClearIgnoreList()
+  InIgnoreList(obj)
+  UseObject(obj, skipQueue=False)
+  UseType(type, hue=-1, container=None, skipQueue=False)
+  UseTargetedItem(item, target)
+  UseLayer(layer, obj=None)
+  FindType(graphic, range=-1, findLocation=None, hue=-1, minimumStackAmount=-1)
+  FindObject(obj, range=-1, findLocation=None)
+  CountType(graphic, source=None, hue=-1)
+  CountTypeGround(graphic, hue=-1, range=-1)
+  MoveItem(item, destination, amount=-1, x=-1, y=-1)
+  MoveItemXYZ(item, x, y, z, amount=-1)
+  MoveItemOffset(obj, xOffset, yOffset, zOffset, amount=-1)
+  MoveTypeOffset(id, findLocation, xOffset, yOffset, zOffset, amount=-1, hue=-1, range=-1)
+  MoveTypeXYZ(id, findLocation, x, y, z, amount=-1, hue=-1, range=-1)
+  MoveType(id, sourceContainer, destinationContainer, x=-1, y=-1, z=0, hue=-1, amount=-1)
+  Rehue(obj, hue)
+  AutoColorPick(hue)
+  ClearObjectQueue()
+
+[Proprieta]
+  Property(obj, value)
+  PropertyValue(obj, property, argument=0)
+  WaitForProperties(obj, timeout)
+
+[Regioni]
+  InRegion(attribute, obj=None)
+  RegionName(obj=None)
+
+[Skill]
+  UseSkill(skill)
+  UseLastSkill()
+  Skill(name, baseSkill=False)
+  SkillCap(name)
+  SkillDelta(name)
+  SkillState(name)
+  SetSkill(skill, status)
+  SetStatus(stat, lockStatus)
+
+[Magie]
+  Cast(name)
+  Cast(name, obj)
+  InterruptSpell()
+
+[Target]
+  CancelTarget()
+  WaitForTarget(timeout=5000)
+  WaitForTargetOrFizzle(timeout)
+  WaitingForTarget()
+  TargetExists(targetExistsType="Any")
+  Target(obj, checkRange=False, useQueue=False, senderSerial=-1)
+  TargetXYZ(x, y, z, itemID=0)
+  TargetTileOffset(xOffset, yOffset, zOffset, itemID=0)
+  TargetTileOffsetResource(xOffset, yOffset, zOffset, itemID=0)
+  TargetTileRelative(obj, distance, reverse=False, itemID=0)
+  TargetByResource(toolObj, resourceType)
+  TargetType(obj, hue=-1, range=-1)
+  TargetGround(obj, hue=-1, range=-1)
+  ClearTargetQueue()
+  GetEnemy(notorieties, bodyType="Any", distance="Next", infliction="Any", maxDistance=-1)
+  GetFriend(notorieties, bodyType="Any", distance="Next", infliction="Any", maxDistance=-1)
+  GetFriendListOnly(distance="Next", targetInfliction="Any", bodyType="Any", maxDistance=-1)
+  SetEnemy(obj)
+  SetFriend(obj)
+  SetLastTarget(obj)
+
+[Timer]
+  Reset(offset)
+  CreateTimer(name)
+  TimerExists(name)
+  RemoveTimer(name)
+  SetTimer(name, milliseconds=0)
+  Timer(name)
+  TimerMsg(name)
+
+[Bacchette]
+  EquipWand(wandName, minimumCharges=-1)
+  FindWand(wandName, containerSource=None, minimumCharges=-1)
