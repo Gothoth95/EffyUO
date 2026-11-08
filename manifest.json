@@ -1,6 +1,6 @@
 {
- "version": "2026.11.08-1756",
- "message": "Prima versione: assistant interno (macro Python CA, hotkey, agenti, PvP), scelta ClassicAssist, fix case e mob fantasma.",
+ "version": "2026.11.08-1837",
+ "message": "Macro: supporto a TileFlags, Statics, TileData, MapInfo e UOMath di ClassicAssist.",
  "files": [
   {
    "path": "Avvia - Assistant interno.bat",
@@ -15,22 +15,22 @@
   {
    "path": "ClassicUO.Assets.dll",
    "size": 113152,
-   "sha256": "DE826DC7D11E6F9E1A7BB8C4DCEA72A0084A0F404C0576C36918D018A4B3B6F2"
+   "sha256": "8B505F6CD61686CA5F7CAE8C81D5D4DE46DAFBABDD90DF78FFD685C9192B0760"
   },
   {
    "path": "ClassicUO.IO.dll",
    "size": 31232,
-   "sha256": "F8247D6D792D5F7512716CFF3ACC9DE6866F7330EBAE422F81E243869707F9EC"
+   "sha256": "74B87089154D0EABF8B4D26182C0904538F36C6D8FDE8AA25377A2EF98F86F5A"
   },
   {
    "path": "ClassicUO.Renderer.dll",
    "size": 215552,
-   "sha256": "3F706B809C2B2B193D5CB64B4981982D65FBEDF4BC4F6A54765CCFF458003573"
+   "sha256": "9F399E45502160F1743122414A1104C08CA9A0F540F13E4853E139C577809E9E"
   },
   {
    "path": "ClassicUO.Utility.dll",
    "size": 100864,
-   "sha256": "DB3E1FA6F9FDA817CB8E5E669AA5AB060D6C24DC44788F73FCB5F1071486E806"
+   "sha256": "5931D8F707E9FE0215C89A02818C03ACD004D9C853636A7557F4350804392FA3"
   },
   {
    "path": "cuo.deps.json",
@@ -39,13 +39,13 @@
   },
   {
    "path": "cuo.dll",
-   "size": 5127680,
-   "sha256": "A35778B83A68392270003CF906550408BCCBDE0577C0FDEFCF2EEAE89FCE6B49"
+   "size": 5135360,
+   "sha256": "6DE3E9EBF7FB37E11F27BFC76375D37657935F8E75D63BCF367B0B9DE5C664FC"
   },
   {
    "path": "cuo.exe",
    "size": 228352,
-   "sha256": "40A74C4A4BC5B1A4F9BB0378F9A0CD51586F3774B9CBB155E4B9BC2A3471F14B"
+   "sha256": "4F8B8BB75774062C6B22619D81F900B171933DB28F0BFE7143D16C64F9BA159F"
   },
   {
    "path": "cuo.runtimeconfig.json",
@@ -155,7 +155,7 @@
   {
    "path": "Launcher/ClassicUO.exe",
    "size": 108544,
-   "sha256": "91E97211E09275C2D4288DAFA89C78DC50FECE8AB0B3B017B4DE96BCE95B85C2"
+   "sha256": "5E725107F08EEB6AE4E6E46B32E6AF6DE1D116FDF10583343E48C72714B7B65B"
   },
   {
    "path": "Launcher/ClassicUO.exe.config",
